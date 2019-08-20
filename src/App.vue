@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div>
     <v-header></v-header>
-    <div class="tab">
+    <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
       </div>
@@ -12,12 +12,13 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view/>
+    <!-- 此处挂载的是商品、评论和商家的内容 -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-    import header from './components/header/header';
+    import header from 'components/header/header';
 
     export default {
         components: {
@@ -37,4 +38,13 @@
     .tab-item
       flex: 1
       text-align: center
+
+      & > a
+        display: block
+        font-size: 14px
+        color: rgb(77, 85, 93)
+        // 配置超链接active时变色
+
+        &.active
+          color: rgb(240, 20, 20)
 </style>
