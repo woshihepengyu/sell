@@ -1,1 +1,15 @@
-@import "~cube-ui/src/common/stylus/mixin.styl"
+border-1px($color)
+  position: relative
+  &:after
+    display: block
+    position: absolute
+    left: 0
+    bottom: 0
+    border-top 1px solid $color
+    width: 100% /* absolute没有宽度 */
+    content: ''
+
+bg-image($url)
+  background-image url($url + "@2x.png") /* 正常情况下使用@2x的图像 */
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio)
+    background-image url($url + "@3x.png")

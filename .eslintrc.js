@@ -27,7 +27,12 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     "indent": ["off", 2],
     "no-unused-vars": 'off',
+    // 配0就是不检测
     "space-before-function-paren": 0,
+    "space-comment": 0,
+    'no-multiple-empty-lines': 0,
+    'comma-spacing': 0,
+    'no-multi-spaces':0,
     "semi": ['error', 'always']
   }
 }
