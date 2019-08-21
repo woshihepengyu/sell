@@ -25,7 +25,7 @@
       </div>
     </div>
     <!-- 当我们点击按钮的时候，图层出现-->
-    <div class="bulletin-wrapper" @click="showDetail" transition="fade">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
@@ -34,20 +34,42 @@
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
     <!-- 弹出图层，固定在上方，并通过v-show来控制弹出的隐藏-->
-    <div v-show="detailShow" class="detail">
+    <!-- https://cn.vuejs.org/v2/guide/transitions.html-->
+    <transition name="slide-fade">
+    <div v-show="detailShow" class="detail" transition="fade">
       <!-- 清除浮动-->
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
           <div class="star-wrapper">
-            <star :size="48" :score="3.6"></star>
+            <star :size="48" :score="seller.score"></star>
+          </div>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">优惠信息</div>
+            <div class="line"></div>
+          </div>
+          <ul v-if="seller.supports" class="supports">
+            <li class="support-item" v-for="(item,index) in seller.supports" :key="(item.id,index.id)">
+              <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+              <span class="text">{{seller.supports[index].description}}</span>
+            </li>
+          </ul>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">商家公告</div>
+            <div class="line"></div>
+          </div>
+          <div class="bulletin">
+            <p class="content">{{seller.bulletin}}</p>
           </div>
         </div>
-        <div class="detail-close">
+        <div class="detail-close" @click="hideDetail">
           <i class="icon-close"></i>
         </div>
       </div>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -68,6 +90,9 @@
         methods: {
             showDetail() {
                 this.detailShow = true; // 点击按钮detailShow显示为true，即显示隐藏的界面
+            },
+            hideDetail() {
+                this.detailShow = false;
             }
         },
         created() {
@@ -235,7 +260,16 @@
       width: 100%
       height: 100%
       overflow: auto
-      background-color: rgba(7, 17, 27, .5);
+      backdrop-filter: blur(10px)
+      opacity: 1
+      background: rgba(7, 17, 27, 0.8)
+      transition all 0.9s
+      &.fade-transition
+        opacity 1
+         background rgba(7,17,27,0.8)
+      &.fade-enter,&.fade-leave
+        opacity 0
+        background rgba(7,17,27,0)
       .detail-wrapper /* 外层容器*/
         width : 100%
         min-height : 100%
@@ -253,6 +287,58 @@
             margin-top 18px
             padding 2px 0
             text-align center
+          .title
+            display flex /* postcss 工具 给有兼容性问题的css属性自动添加兼容性代码 */
+            width 80%
+            margin 28px auto 24px auto
+            .line
+              flex 1 /* 等分 */
+              position relative
+              top -6px
+              border-bottom 1px solid rgba(255,255,255,0.2)
+            .text
+              padding 0px 12px
+              font-size 16px
+              font-weight 700px
+          .supports
+            width 80%
+            margin 22px auto
+            .support-item
+              padding 0 12px
+              font-size 0px
+              margin-bottom 12px
+              &:last-child
+                margin-bottom 0px
+              .icon
+                display inline-block
+                width 16px
+                height 16px
+                vertical-align top
+                margin-right 6px
+                background-size 16px 16px
+                background-repeat no-repeat
+                &.decrease
+                  bg-image('decrease_2')
+                &.discount
+                  bg-image('discount_2')
+                &.guarantee
+                  bg-image('guarantee_2')
+                &.invoice
+                  bg-image('invoice_2')
+                &.special
+                  bg-image('special_2')
+              .text
+                line-height 16px
+                font-size 12px
+                color #ffffff
+
+          .bulletin
+            width 80%
+            margin 0 auto
+            .content
+              padding 0 12px
+              line-height 24px
+              font-size 12px
         .detail-close
           position: relative
           width: 32px
@@ -260,4 +346,17 @@
           margin: -64px auto 0 auto /* 对应padding-bottom*/
           font-size: 14px
           clear both
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    .slide-fade-enter-active {
+      transition: all .4s ease;
+    }
+    .slide-fade-leave-active {
+      transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to{
+      /* .slide-fade-leave-active for below version 2.1.8 */
+      transform: translateX(10px);
+      opacity: 0;
+    }
 </style>
