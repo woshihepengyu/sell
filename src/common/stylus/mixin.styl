@@ -8,6 +8,9 @@ border-1px($color)
     border-top 1px solid $color
     width: 100% /* absolute没有宽度 */
     content: ''
+border-none() /* 将列表中最后一项的横线去掉的时候才会用到*/
+  &:after
+    display: none
 
 bg-image($url)
   background-image url($url + "@2x.png") /* 正常情况下使用@2x的图像 */

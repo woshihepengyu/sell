@@ -260,6 +260,7 @@
       width: 100%
       height: 100%
       overflow: auto
+      /*它适用于元素背后的所有元素，为了看到效果，必须使元素或其背景至少部分透明。*/
       backdrop-filter: blur(10px)
       opacity: 1
       background: rgba(7, 17, 27, 0.8)
