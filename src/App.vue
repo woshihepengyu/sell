@@ -13,7 +13,9 @@
       </div>
     </div>
     <!-- 此处挂载的是商品、评论和商家的内容 -->
-    <router-view></router-view>
+    <!-- 路由出口 -->
+    <!-- 路由匹配到的组件将渲染在这里 -->
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
