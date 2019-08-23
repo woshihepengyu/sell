@@ -158,6 +158,7 @@
                     // 没有商品时为折叠状态
                     if (!this.totalCount) {
                         this.fold = false;
+                        // return false;
                     }
                     // 有商品的时候以变量show做状态切换
                     // fold为true(折叠)则show为false(折叠)，fold为false(展开)，则show为true(展开);

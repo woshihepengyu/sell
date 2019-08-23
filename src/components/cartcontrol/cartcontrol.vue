@@ -26,7 +26,6 @@
       },
       methods: {
           addCart(event) {
-              console.log('addCart method come in');
               // 解决PC端双点击的问题
               if (!event._constructed) { // 浏览器直接return掉,去掉自带click事件的点击
                   return;
@@ -44,7 +43,6 @@
               this.$emit('cart-add', event.target);
           },
           decreaseCart(event) {
-              console.log('decreaseCart method come in');
               // 解决PC端双点击的问题
               if (!event._constructed) { // 浏览器直接return掉,去掉自带click事件的点击
                   return;
@@ -78,7 +76,7 @@
         line-height 24px
         font-size 24px
         vertical-align top
-        color rgb(0, 160, 220, 0.2)
+        color rgb(0, 160, 220)
         &.inner-enter-active, &.inner-leave-active
           transition: all 0.4s linear
           opacity 1
