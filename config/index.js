@@ -46,6 +46,7 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
+    port: 9000,
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
@@ -55,7 +56,7 @@ module.exports = {
     /**
      * Source Maps
      */
-
+    // false 压缩的文件少很多 不允许js调试
     productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
