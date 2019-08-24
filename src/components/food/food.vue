@@ -36,7 +36,8 @@
           <ratingselect :select-type="selectType" :only-content="onlyContent" :desc="desc" :ratings="food.ratings"></ratingselect>
           <div class="rating-wrapper">
             <ul v-show="food.ratings && food.ratings.length">
-              <li v-for="rating in food.ratings" class="ratings-item border-1px" :key="rating.id">
+              <!-- v-show="needShow(rating.rateType, rating.text)" -->
+              <li  v-show="needShow(rating.rateType, rating.text)" v-for="rating in food.ratings" class="ratings-item border-1px" :key="rating.id">
                 <div class="user">
                   <span class="name">{{rating.username}}</span>
                   <img class="avatar" height="12" width="12" :src="rating.avatar">
@@ -77,6 +78,20 @@
             split,
             ratingselect
         },
+        events: {
+            'ratingtype.select'(type) {
+                this.selectType = type;
+                this.$nextTick(() => {
+                    this.scroll.refresh();
+                });
+            },
+            'content.toggle'(onlyContent) {
+                this.onlyContent = onlyContent;
+                this.$nextTick(() => {
+                    this.scroll.refresh();
+                });
+            }
+        },
         // 日期格式化
         filters: {
             formatDate(time) {
@@ -97,6 +112,16 @@
             };
         },
         methods: {
+            needShow(type, text) {
+                if (this.onlyContent && !text) {
+                    return false;
+                }
+                if (this.selectType === ALL) {
+                    return true;
+                } else {
+                    return type === this.selectType;
+                }
+            },
             // 所以在界面展示的时候，对betterScroll进行初始化，即在show函数中进行初始化
             show() {
                 this.showFlag = true;

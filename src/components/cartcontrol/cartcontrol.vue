@@ -58,7 +58,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .cartcontrol
     font-size 0 // 消除incline-block中的空隙
-    .cart-decrease, .cart-add
+    .cart-decrease,.cart-add
       display inline-block // 横向排列
       padding 6px // 图标较小，增加它的点击区域
       line-height 24px

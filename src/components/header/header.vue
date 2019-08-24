@@ -332,7 +332,6 @@
                 line-height 16px
                 font-size 12px
                 color #ffffff
-
           .bulletin
             width 80%
             margin 0 auto

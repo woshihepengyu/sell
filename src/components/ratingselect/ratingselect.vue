@@ -63,10 +63,10 @@
                   return;
               }
               // 将this.selectType设置成传入的参数,而不是food传过来的初始化的值，之后样式就可以随着点击改变了
-              this.sType = type;
+              this.selectType = type;
               // 派发事件通知父组件food.vue selectType的改变,将type值传出去
               // this.$emit('se-type', type);
-              this.$emit('increment', 'selectType', this.sType);
+              this.$emit('increment', 'selectType', this.selecttype);
           },
           toggleContent (event) {
               if (!event._constructed) { // 浏览器直接return掉,去掉自带click事件的点击
